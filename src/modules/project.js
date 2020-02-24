@@ -1,11 +1,12 @@
 // Project factory function
 
-const Project = (title, description) => {
+const Project = (title, description, color) => {
   let todos = []
   return {
     todos,
     title, 
-    description
+    description,
+    color
   }
 };
 

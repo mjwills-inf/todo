@@ -2,6 +2,7 @@
 <html lang="en-GB">
 
 <head>
+  <link rel="stylesheet" href="../src/reset.css">
   <link rel="stylesheet" href="../src/style.css">
   <link rel="icon" type="image/x-icon" href="">
   <meta charset="UTF-8">
@@ -12,19 +13,69 @@
 </head>
 
 <div id="page-container">
+  
   <header>
     <div id="header-container">
-
+      <div id="header-title-button">
+        <h1>[ ToDo ]</h1>
+        <button>Settings</button>
+      </div>
+      <div id="current-display">
+        <h3>Viewing:</h3>
+          <div id="project-name">
+            dummy 
+          </div>
+          <div id="project-description">
+            dummy
+          </div>
+      </div>
     </div>
   </header>
 
   <body>
     <div id="body-container">
+      
+      <div id="project-container">
+        <h2>Projects</h2>
+        <button>Add</button>
+        <div id="dom-project">
+          
+        </div>
 
+      </div>
+
+      <div id="todo-container">
+        <h2>Todos</h2>
+        <button>Add</button>
+        <div id="dom-todo">
+
+        </div>
+      </div>
+      
     </div>
 
+    <div id="modal-project">
+      <div id="input-form-project">
+        <h3>New Project</h3>
+        <form>
+          <label for="project-title">Title:</label>
+          <input id="project-title" name="project-title" type="text">
+          <label for="project-description">Description:</label>
+          <input id="project-description" name="project-description" type="text">
+          <label for="color">Colour:</label>
+          <input id="color" name="color" type="color" value="#b2b2b2">
+          
+        </form>
+    </div>
+    <div id="modal-todo">
+      <div id="input-form-todo">
+        <form>
+          
+        </form>
 
+    </div>
   </body>
+
 </div>
 
 </html>

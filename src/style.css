@@ -1,0 +1,46 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#page-container {
+  background-color: rgb(150, 150, 150);
+}
+
+#header-container {
+  background-color: rgb(200, 200, 200);
+}
+
+#current-display h3 {
+  display: inline-block;
+}
+
+#current-display #project-name {
+  display: inline-block;
+}
+
+#body-container {
+  display: grid;
+  gap: 10px;
+  grid-template-areas: 
+    "project"
+    "todo";
+  grid-template-columns: 1fr;  
+}
+
+@media (min-width: 600px) {
+  #body-container {
+    display: grid;
+    grid-template-areas: "project todo";
+    grid-template-columns: 2fr 5fr;
+  }
+}
+
+#project-container {
+  grid-area: project;
+  background-color: rgb(175, 175, 175);
+}
+
+#todo-container {
+  grid-area: todo;
+  background-color: rgb(175, 175, 175);
+}

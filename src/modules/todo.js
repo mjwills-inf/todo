@@ -1,6 +1,6 @@
 // Todo factory function
 
-const TodoItem = (title, description, dueDate, priority, notes, flagged, completed) => {
+const Todo = (title, description, dueDate, priority, notes, flagged, completed) => {
   return {
     title, 
     description,
@@ -12,4 +12,4 @@ const TodoItem = (title, description, dueDate, priority, notes, flagged, complet
   }
 };
 
-export default TodoItem
+export default Todo
