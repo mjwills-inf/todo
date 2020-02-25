@@ -44,3 +44,15 @@ html {
   grid-area: todo;
   background-color: rgb(175, 175, 175);
 }
+
+#modal-project {
+  display: none;
+  margin: 20px;
+  background-color: rgb(100, 100, 100);
+}
+
+#modal-todo {
+  display: none;
+  margin: 20px;
+  background-color: rgb(75, 75, 75);
+}
