@@ -24,4 +24,11 @@ const Project = (title, description, color) => {
   }
 };
 
-export { Project, Todo }
+// Project Container module iife
+
+// const projectContainer = (function() {
+//   const projects = [];
+//   console.log(projects);
+// })();
+
+export { Project, Todo, }

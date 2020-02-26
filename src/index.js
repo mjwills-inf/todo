@@ -1,5 +1,6 @@
-import { Todo, Project } from './modules/todoObjects';
+import { Todo, Project,  } from './modules/todoObjects';
 import DomController from './modules/DOMcontroller';
+import Render from './modules/render';
 
 
 // Need creation of some default data for DOM start
@@ -13,9 +14,10 @@ let demoTodo3 = Todo('Edit, delete, complete', '');
 
 defaultProject.todos.push(demoTodo1, demoTodo2, demoTodo3);
 
-// Some stuff
+// Intialise some stuff
 
 console.log(defaultProject);
 // factory functions - to use a function we need to assign to a variable
+// projectContainer();
 let domControl = DomController();
 domControl.addListeners();
