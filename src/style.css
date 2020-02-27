@@ -54,5 +54,21 @@ html {
 #modal-todo {
   display: none;
   margin: 20px;
-  background-color: rgb(75, 75, 75);
+  background-color: rgb(125, 125, 125);
 }
+
+/* rendered shit */
+.project-div {
+  margin: 5px;
+  background-color: rgb(214, 253, 203);
+}
+
+.todo-div {
+  margin: 5px;
+  background-color: rgb(203, 247, 253);
+}
+
+.completeDiv, .flaggedDiv {
+  display: inline-block;
+  background-color: rgb(160, 227, 236);
+} 

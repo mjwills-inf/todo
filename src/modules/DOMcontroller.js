@@ -1,4 +1,4 @@
-import { Todo, Project } from './todoObjects';
+import { Todo, Project, ProjectContainer } from './todoObjects';
 import Render from './render';
 
 const DomController = () => {
@@ -25,7 +25,7 @@ const DomController = () => {
   const buttonSwitch = (event) => {
     switch (event.target.id) {
       case 'settings':
-        console.log('settings test')
+        alert("Settings modal for dark mode?")
         break;
       case 'add-project-modal':
         toggleModalProject();

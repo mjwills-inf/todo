@@ -1,5 +1,4 @@
-// Todo factory function
-
+// Todo factory
 const Todo = (title, description, dueDate, priority, notes, flagged, completed) => {
   return {
     title, 
@@ -12,8 +11,7 @@ const Todo = (title, description, dueDate, priority, notes, flagged, completed) 
   }
 };
 
-// Project factory function
-
+// Project factory
 const Project = (title, description, color) => {
   let todos = []
   return {
@@ -24,11 +22,16 @@ const Project = (title, description, color) => {
   }
 };
 
-// Project Container module iife
+// Project Container factory
+const ProjectContainer = () => {
+    const projects = [];  
+    const addToProjectContainer = (projectObject) => {
+      projects.push(projectObject)    
+    }
+    return {    
+      projects,
+      addToProjectContainer,        
+    }  
+  };
 
-// const projectContainer = (function() {
-//   const projects = [];
-//   console.log(projects);
-// })();
-
-export { Project, Todo, }
+export { Project, Todo, ProjectContainer }
