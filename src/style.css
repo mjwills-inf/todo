@@ -68,7 +68,22 @@ html {
   background-color: rgb(203, 247, 253);
 }
 
-.completeDiv, .flaggedDiv {
+.complete-div, .flagged-div {
+  margin: 5px;
   display: inline-block;
-  background-color: rgb(160, 227, 236);
+  background-color: rgb(119, 226, 240);
 } 
+
+#project-description-display, #project-name-display {
+  border: dashed 1px black;
+  margin: auto;
+  margin: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  width: fit-content;
+}
+
+.date-div {
+  width: fit-content;
+}
