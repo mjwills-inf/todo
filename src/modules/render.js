@@ -54,7 +54,10 @@ const Render = () => {
       
       let dateDiv = document.createElement('div');
       dateDiv.className = 'date-div';
-      dateDiv.innerText = projectArg[i].dueDate; 
+      dateDiv.innerText = projectArg[i].dueDate;
+      
+      let noteDescrDiv = document.createElement('div')
+      noteDescrDiv.className = 'notes-container'
 
       let editButton = document.createElement('button');
       editButton.classList = 'edit-button todo-edit';
@@ -74,6 +77,7 @@ const Render = () => {
 
       newDiv.appendChild(title);
       newDiv.appendChild(dateDiv);
+      newDiv.appendChild(noteDescrDiv)
       newDiv.appendChild(editButton);
       newDiv.appendChild(deleteButton);
       newDiv.appendChild(flaggedDiv);

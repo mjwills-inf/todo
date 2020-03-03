@@ -10,7 +10,8 @@ import Render from './modules/render';
 let projectContainer = ProjectContainer();
 let defaultProject = Project('Default', 'This is your default project', '#013220');
 let dummyProject = Project('Dummy', 'for demo', '#02075D');
-let demoTodo1 = Todo('Your Todos are displayed here', '', '02/02/2022', 3, '', false, true);
+let demoTodo1 = Todo('Your Todos are displayed here', 'Description Description Description',
+    '02/02/2022', 3, 'Notes Notes Notes Notes Notes Notes Notes Notes', false, true);
 let demoTodo2 = Todo('Click to expand', "Here's more infrmation in a description", 
     '', 3, "And here's even more for any notes you may want to make", false, false);
 let demoTodo3 = Todo('Edit, delete, complete', '', '', false, false);

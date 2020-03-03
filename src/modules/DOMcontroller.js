@@ -103,16 +103,16 @@ const DomController = () => {
 
   const documentListener = () => { 
     document.addEventListener('click', function (event) {    
+      
       if (event.target.matches('.project-div')) {        
         let containerIndex = event.target.getAttribute('container-array-ref');
         currentProject = projectContainer.projects[containerIndex];
         render.renderTodos(currentProject.todos);
         render.currentProjectDisplay(currentProject);
       }
-      if (event.target.matches('.todo-div')) {
-        console.log("todo-working");
-        // expand displaying div with extra info
-        // close other expanded
+      if (event.target.matches('.todo-div')) {        
+        appendTodo(event);
+        
       }
       if (event.target.matches('.project-edit')) {
         console.log(event.target);
@@ -134,6 +134,21 @@ const DomController = () => {
         console.log(event.target);
       }
     })
+  }
+
+  const appendTodo = (event) => {
+    let arrayRef = event.target.getAttribute('project-array-ref')
+    console.log(arrayRef)
+    
+    let newDivDesc = document.createElement('div')
+    newDivDesc.className = 'description-div'
+    let newDivNotes = document.createElement('div')
+    newDivNotes.className = 'notes-div'
+    console.log(currentProject.todos[arrayRef].description)
+       
+    event.target.querySelector('.notes-container').appendChild(newDivDesc)
+    event.target.querySelector('.notes-container').appendChild(newDivNotes)
+    
   }
   
 
