@@ -60,13 +60,13 @@ html {
 }
 
 #modal-project-edit {
-  /* display: none; */
+  display: none;
   margin: 20px;
   background-color: rgb(155, 126, 126);
 }
 
 #modal-todo-edit {
-  /* display: none; */
+  display: none;
   margin: 20px;
   background-color: rgb(155, 126, 126);
 }
