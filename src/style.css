@@ -45,6 +45,8 @@ html {
   background-color: rgb(175, 175, 175);
 }
 
+/* modals */
+
 #modal-project {
   display: none;
   margin: 20px;
@@ -55,6 +57,18 @@ html {
   display: none;
   margin: 20px;
   background-color: rgb(125, 125, 125);
+}
+
+#modal-project-edit {
+  /* display: none; */
+  margin: 20px;
+  background-color: rgb(155, 126, 126);
+}
+
+#modal-todo-edit {
+  /* display: none; */
+  margin: 20px;
+  background-color: rgb(155, 126, 126);
 }
 
 /* rendered shit */
@@ -81,9 +95,14 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  width: fit-content;
+  width: fit-content;  
 }
 
-.date-div {
+h1, h2, h3 {
+  font-weight: 800;
+  margin: 4px;
+}
+
+.date-div, .description-div, .notes-div, .notes-container {
   width: fit-content;
 }

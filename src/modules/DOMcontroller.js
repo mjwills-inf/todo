@@ -89,13 +89,13 @@ const DomController = () => {
     const newProject = Project(projectTitleInput.value, projectDescriptionInput.value,
         projectColorInput.value);
     projectContainer.addToProjectContainer(newProject);    
-  }
+  };
   const createTodo = () => {
     const newTodo = Todo(todoTitleInput.value, todoDescription.value, todoDueDateInput.value, 
         todoPriorityInput.value, todoNoteInput.value, false, false);
     currentProject.todos.push(newTodo);
    
-  }
+  };
 
   // started with attempt to add listeners in render (while creating nodes)
   // stack maxed with domcontroller calling render calling domcontroller etc etc
@@ -111,8 +111,8 @@ const DomController = () => {
         render.currentProjectDisplay(currentProject);
       }
       if (event.target.matches('.todo-div')) {        
-        appendTodo(event);
-        
+        clearAppendTodo();
+        appendTodo(event);        
       }
       if (event.target.matches('.project-edit')) {
         console.log(event.target);
@@ -133,23 +133,48 @@ const DomController = () => {
       if (event.target.matches('.complete-div')) {
         console.log(event.target);
       }
+      if (event.target.matches('#project-submit-edit')) {
+        console.log(event.target);
+      }
+      if (event.target.matches('#project-cancel-edit')) {
+        console.log(event.target);
+      }
+      if (event.target.matches('#todo-submit-edit')) {
+        console.log(event.target);
+      }
+      if (event.target.matches('#todo-cancel-edit')) {
+        console.log(event.target);
+      }
     })
-  }
+  };
+  
 
+  const clearAppendTodo = () => {
+    let parentNodes = document.querySelectorAll('.notes-container');    
+    parentNodes.forEach(
+      function (currentValue) {      
+        currentValue.innerHTML = '';
+      }
+    );
+  }   
+  
   const appendTodo = (event) => {
-    let arrayRef = event.target.getAttribute('project-array-ref')
-    console.log(arrayRef)
-    
-    let newDivDesc = document.createElement('div')
-    newDivDesc.className = 'description-div'
-    let newDivNotes = document.createElement('div')
-    newDivNotes.className = 'notes-div'
-    console.log(currentProject.todos[arrayRef].description)
-       
-    event.target.querySelector('.notes-container').appendChild(newDivDesc)
-    event.target.querySelector('.notes-container').appendChild(newDivNotes)
-    
-  }
+    let noteConDiv = event.target.querySelector('.notes-container');
+    if (noteConDiv.classList.contains('notes-container-rendered')) {
+      noteConDiv.classList.remove('notes-container-rendered')
+    } else {
+      let arrayRef = event.target.getAttribute('project-array-ref');    
+      let newDivDesc = document.createElement('div');
+      newDivDesc.className = 'description-div';
+      newDivDesc.textContent = currentProject.todos[arrayRef].description;
+      let newDivNotes = document.createElement('div');
+      newDivNotes.className = 'notes-div';    
+      newDivNotes.textContent = currentProject.todos[arrayRef].notes;       
+      noteConDiv.appendChild(newDivDesc);
+      noteConDiv.appendChild(newDivNotes);
+      noteConDiv.classList.add('notes-container-rendered') 
+    }  
+  };
   
 
   return { 

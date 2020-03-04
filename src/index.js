@@ -14,10 +14,14 @@ let demoTodo1 = Todo('Your Todos are displayed here', 'Description Description D
     '02/02/2022', 3, 'Notes Notes Notes Notes Notes Notes Notes Notes', false, true);
 let demoTodo2 = Todo('Click to expand', "Here's more infrmation in a description", 
     '', 3, "And here's even more for any notes you may want to make", false, false);
-let demoTodo3 = Todo('Edit, delete, complete', '', '', false, false);
+let demoTodo3 = Todo('Edit, delete, complete', '', '', '', '', false, false);
+let dummyTodo = Todo('Dummy', 'fo demo', '02/02/2020', 2, 'dummy notes', false, false);
 defaultProject.todos.push(demoTodo1, demoTodo2, demoTodo3);
+dummyProject.todos.push(dummyTodo);
+
 projectContainer.addToProjectContainer(defaultProject);
 projectContainer.addToProjectContainer(dummyProject);
+
 
 // Intialise some stuff
 // "factory functions - to use a function we need to assign to a variable"

@@ -61,7 +61,6 @@
       <div id="input-form-project">
         <h3>New Project</h3>
         <h6>[ -- This is a modal -- ]</h6>
-
         <label for="project-title">Title:</label>
         <input id="project-title" name="project-title" type="text">
         <label for="project-description">Description:</label>
@@ -70,14 +69,13 @@
         <input id="color" name="color" type="color" value="#b2b2b2">
         <button id="project-submit">Create</button>
         <button id="project-cancel">Cancel</button>
-
       </div>
     </div>
+    
     <div id="modal-todo">
       <div id="input-form-todo">
         <h3>New Todo</h3>
         <h6>[ -- This is a modal -- ]</h6>
-
         <label for="title">Title:</label>
         <input id="title" name="title" type="text">
         <label for="description">Description:</label>
@@ -95,10 +93,49 @@
         <textarea id="notes" name="notes" rows="5" cols="30"></textarea>
         <button id="todo-submit">Create</button>
         <button id="todo-cancel">Cancel</button>
-
-
       </div>
     </div>
+
+    <div id="modal-project-edit">
+      <div id="input-form-project-edit">
+        <h3>EDIT Project</h3>
+        <h6>[ -- This is a modal -- ]</h6>
+        <label for="project-title-edit">Title:</label>
+        <input id="project-title-edit" name="project-title-edit" type="text">
+        <label for="project-description-edit">Description:</label>
+        <input id="project-description-edit" name="project-description-edit" type="text">
+        <label for="color-edit">Colour:</label>
+        <input id="color-edit" name="color-edit" type="color" value="#b2b2b2">
+        <button id="project-submit-edit">Confirm</button>
+        <button id="project-cancel-edit">Cancel</button>
+      </div>
+    </div>
+    
+    <div id="modal-todo-edit">
+      <div id="input-form-todo-edit">
+        <h3><strong>Todo</strong></h3>
+        <h6>[ -- This is a modal -- ]</h6>
+        <label for="title-edit">Title:</label>
+        <input id="title-edit" name="title-edit" type="text">
+        <label for="description-edit">Description:</label>
+        <input id="description-edit" name="description-edit" type="text">
+        <label for="duedate-edit">Due Date:</label>
+        <input id="duedate-edit" name="duedate-edit" type="date">
+        <label for="priority-edit">Priority:</label>
+        <select id="priority-edit" name="priority-edit">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+          <option value="none">None</option>
+        </select>
+        <label for="notes-edit">Notes:</label>
+        <textarea id="notes-edit" name="notes-edit" rows="5" cols="30"></textarea>
+        <button id="todo-submit-edit">Confirm</button>
+        <button id="todo-cancel-edit">Cancel</button>
+      </div>
+    </div>
+
+
   </body>
 
 </div>
