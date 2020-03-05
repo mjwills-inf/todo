@@ -106,3 +106,11 @@ h1, h2, h3 {
 .date-div, .description-div, .notes-div, .notes-container {
   width: fit-content;
 }
+
+div .isFlagged {
+  background-color: rgb(172, 44, 44);
+}
+
+div .isComplete {
+  background-color: rgb(65, 251, 48);
+}

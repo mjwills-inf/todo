@@ -1,11 +1,9 @@
 
 const Render = () => {
-  
 
   const renderProjects = (projectContainerArg) => {
     const projectDiv = document.querySelector('#dom-project');
     projectDiv.innerHTML = '';    
-    
     for (let i=0; i<projectContainerArg.length; i++) {
       
       let newDiv = document.createElement('div');
@@ -38,10 +36,8 @@ const Render = () => {
   }
 
   const renderTodos = (projectArg) => {
-
     const todoDiv = document.querySelector('#dom-todo');
     todoDiv.innerHTML = '';
-
     for (let i=0; i<projectArg.length; i++) {
 
       let newDiv = document.createElement('div');
@@ -69,11 +65,17 @@ const Render = () => {
 
       let flaggedDiv = document.createElement('div');
       flaggedDiv.className = 'flagged-div';
-      flaggedDiv.innerText = 'flagged-div';
+      flaggedDiv.innerText = '[flagged-div]';
+      if (projectArg[i].flagged == true) {
+        flaggedDiv.classList.add('isFlagged')
+      }
 
       let completeDiv = document.createElement('div');
       completeDiv.className = 'complete-div';
-      completeDiv.innerText = 'complete-div';   
+      completeDiv.innerText = '[complete-div]';
+      if (projectArg[i].completed == true) {
+        completeDiv.classList.add('isComplete')
+      }   
 
       newDiv.appendChild(title);
       newDiv.appendChild(dateDiv);

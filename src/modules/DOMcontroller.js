@@ -5,10 +5,8 @@ import { projectContainer } from '../index'
 const DomController = () => {
   
   /////// Imported and whole function scoped variables for input nodes
-
-  const render = Render();
-  
-  let currentProjectRef = 0
+  const render = Render();  
+  let currentProjectRef = 0;
   
   const projectTitleInput = document.querySelector('#project-title');
   const projectDescriptionInput = document.querySelector('#project-description');
@@ -26,11 +24,11 @@ const DomController = () => {
   const todoDescriptionEdit = document.querySelector('#description-edit');
   const todoDueDateEdit = document.querySelector('#duedate-edit');
   const todoPriorityEdit = document.querySelector('#priority-edit');
-  const todoNoteEdit = document.querySelector('#notes-edit');  
+  const todoNoteEdit = document.querySelector('#notes-edit');
+
 
   /////// Add listeners across all markup and modal buttons with switch statement 
-  /////// pointing to appropriate helper and imported functions
-  
+  /////// pointing to appropriate helper and imported functions  
   const addListeners = () => {
     const buttons = document.querySelectorAll('button');
     for (let i = 0; i < buttons.length; i++) {
@@ -89,8 +87,8 @@ const DomController = () => {
     }
   }
 
-  /////// Helper / directed functions for switch statement listeners
 
+  /////// Helper / directed functions for switch statement listeners
   const toggleModalProject = () => {
     const modalProject = document.querySelector('#modal-project');
     if (modalProject.style.display == 'none' || modalProject.style.display == '') {
@@ -130,19 +128,17 @@ const DomController = () => {
         projectContainer.projects[currentProjectRef].todos.push(newTodo);
   }
 
+
   /////// Event listeners for all of the rendered content (todos and projects)
   // Started with attempt to add listeners in render (while creating nodes)
   // stack maxed with domcontroller calling render calling domcontroller etc etc
   // read article advising whole document listener and adding event.target specific
-  // cant use a switch statement with classList methods
- 
-  
+  // cant use a switch statement with classList methods  
   const documentListener = () => { 
     document.addEventListener('click', function (event) {    
       
       if (event.target.matches('.project-div')) {        
-        let containerIndex = event.target.getAttribute('container-array-ref');
-        
+        let containerIndex = event.target.getAttribute('container-array-ref');        
         currentProjectRef = containerIndex;
         render.renderTodos(projectContainer.projects[currentProjectRef].todos);
         render.currentProjectDisplay(projectContainer.projects[currentProjectRef]);
@@ -156,35 +152,35 @@ const DomController = () => {
         toggleModalProjectEdit(containerIndex);
         popoulateProjectEdit(event);        
       }
-      if (event.target.matches('.project-delete')) {
-        
+      if (event.target.matches('.project-delete')) {               
         deleteProject();
+        render.renderProjects(projectContainer.projects);
+        (currentProjectRef > 0) ? currentProjectRef-- : currentProjectRef=currentProjectRef;        
         render.renderProjects(projectContainer.projects)
-        
-        console.log(projectContainer); 
-
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos);
+        render.currentProjectDisplay(projectContainer.projects[currentProjectRef])
       }
       if (event.target.matches('.todo-edit')) {        
         let projectIndex = event.target.parentNode.getAttribute('project-array-ref');
         toggleModalTodoEdit(projectIndex);
-        popoulateTodoEdit();
-        
+        popoulateTodoEdit();        
       }
       if (event.target.matches('.todo-delete')) {
-        deleteTodo()
+        deleteTodo();
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos)
       }
       if (event.target.matches('.flagged-div')) {
-        console.log(event.target);
+        toggleFlagged();
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos);
       }
       if (event.target.matches('.complete-div')) {
-        console.log(event.target);
-      }
-      
+        toggleComplete();
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos);
+      }      
     });
   } 
 
   /////// functions for all listeners that exist on rendered project / todo areas
-
   const clearAppendTodo = () => {
     let parentNodes = document.querySelectorAll('.notes-container');    
     parentNodes.forEach(
@@ -202,8 +198,7 @@ const DomController = () => {
       let newDivDesc = document.createElement('div');
       newDivDesc.className = 'description-div';
       newDivDesc.textContent = projectContainer.projects[currentProjectRef].
-          todos[arrayRef].description;
-      
+          todos[arrayRef].description;      
       let newDivNotes = document.createElement('div');
       newDivNotes.className = 'notes-div';    
       newDivNotes.textContent = projectContainer.projects[currentProjectRef].
@@ -257,7 +252,6 @@ const DomController = () => {
     targetProject.description = projectDescriptionEdit.value;
     targetProject.color = projectColorEdit.value;    
   }
-
   const confirmTodoEdit = () => {    
     let arrayRef = event.target.parentNode.parentNode.getAttribute('project-index');
     let targetTodo = projectContainer.projects[currentProjectRef].todos[arrayRef];
@@ -272,19 +266,33 @@ const DomController = () => {
     let arrayRef = event.target.parentNode.getAttribute('container-array-ref')
     if (confirm("This will delete your Project and all it's Todos")) {
       projectContainer.projects.splice(arrayRef, 1)
-    }
-    
+    }    
   }
-
   const deleteTodo = () => {
-    let arrayRef = event.target.parentNode.getAttribute('project-array-ref')
-    console.log("delete button")
+    let arrayRef = event.target.parentNode.getAttribute('project-array-ref');    
+    projectContainer.projects[currentProjectRef].todos.splice(arrayRef, 1);
+    console.log(projectContainer.projects[currentProjectRef]);    
   }
 
+  const toggleFlagged = () => {
+    let arrayRef = event.target.parentNode.getAttribute('project-array-ref');
+    if (projectContainer.projects[currentProjectRef].todos[arrayRef].flagged == true) {
+      projectContainer.projects[currentProjectRef].todos[arrayRef].flagged = false
+    } else {
+      projectContainer.projects[currentProjectRef].todos[arrayRef].flagged = true 
+    }
+  }
 
+  const toggleComplete = () => {
+    let arrayRef = event.target.parentNode.getAttribute('project-array-ref');
+    if (projectContainer.projects[currentProjectRef].todos[arrayRef].completed == true) {
+      projectContainer.projects[currentProjectRef].todos[arrayRef].completed = false
+    } else {
+      projectContainer.projects[currentProjectRef].todos[arrayRef].completed = true 
+    }
+  }
   
   ////// Listeners returned for export for page init in index
-
   return { 
     addListeners,
     documentListener
