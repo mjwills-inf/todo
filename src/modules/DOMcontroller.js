@@ -4,10 +4,11 @@ import { projectContainer } from '../index'
 
 const DomController = () => {
   
-  /////// Imported and whole function scoped variables for inputs
+  /////// Imported and whole function scoped variables for input nodes
 
   const render = Render();
-  let currentProject = projectContainer.projects[0];
+  
+  let currentProjectRef = 0
   
   const projectTitleInput = document.querySelector('#project-title');
   const projectDescriptionInput = document.querySelector('#project-description');
@@ -56,7 +57,7 @@ const DomController = () => {
         break;
       case 'todo-submit':
         createTodo();
-        render.renderTodos(currentProject.todos);
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos);
         toggleModalTodo();
         clearModalTodo();
         break;
@@ -67,6 +68,23 @@ const DomController = () => {
       case 'todo-cancel':
         toggleModalTodo();
         clearModalTodo();
+        break; 
+      case 'project-submit-edit':
+        confirmProjectEdit(event);
+        render.currentProjectDisplay(projectContainer.projects[currentProjectRef]);
+        render.renderProjects(projectContainer.projects);
+        toggleModalProjectEdit();
+        break;
+      case 'project-cancel-edit':
+        toggleModalProjectEdit();
+        break;
+      case 'todo-submit-edit':
+        confirmTodoEdit(event);
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos)
+        toggleModalTodoEdit();
+        break;
+      case 'todo-cancel-edit':
+        toggleModalTodoEdit();
         break;
     }
   }
@@ -109,43 +127,51 @@ const DomController = () => {
   const createTodo = () => {
     const newTodo = Todo(todoTitleInput.value, todoDescription.value, todoDueDateInput.value, 
         todoPriorityInput.value, todoNoteInput.value, false, false);
-    currentProject.todos.push(newTodo);
+        projectContainer.projects[currentProjectRef].todos.push(newTodo);
   }
 
   /////// Event listeners for all of the rendered content (todos and projects)
-  //Started with attempt to add listeners in render (while creating nodes)
+  // Started with attempt to add listeners in render (while creating nodes)
   // stack maxed with domcontroller calling render calling domcontroller etc etc
   // read article advising whole document listener and adding event.target specific
-
+  // cant use a switch statement with classList methods
+ 
+  
   const documentListener = () => { 
     document.addEventListener('click', function (event) {    
       
       if (event.target.matches('.project-div')) {        
         let containerIndex = event.target.getAttribute('container-array-ref');
-        currentProject = projectContainer.projects[containerIndex];
-        render.renderTodos(currentProject.todos);
-        render.currentProjectDisplay(currentProject);
+        
+        currentProjectRef = containerIndex;
+        render.renderTodos(projectContainer.projects[currentProjectRef].todos);
+        render.currentProjectDisplay(projectContainer.projects[currentProjectRef]);
       }
       if (event.target.matches('.todo-div')) {        
         clearAppendTodo();
         appendTodo(event);        
       }
       if (event.target.matches('.project-edit')) {        
-        let containerIndex = event.target.parentNode.getAttribute('container-array-ref');
-        console.log(containerIndex);
+        let containerIndex = event.target.parentNode.getAttribute('container-array-ref');        
         toggleModalProjectEdit(containerIndex);
         popoulateProjectEdit(event);        
       }
       if (event.target.matches('.project-delete')) {
-        console.log(event.target);
+        
+        deleteProject();
+        render.renderProjects(projectContainer.projects)
+        
+        console.log(projectContainer); 
+
       }
       if (event.target.matches('.todo-edit')) {        
         let projectIndex = event.target.parentNode.getAttribute('project-array-ref');
         toggleModalTodoEdit(projectIndex);
         popoulateTodoEdit();
+        
       }
       if (event.target.matches('.todo-delete')) {
-        console.log(event.target);
+        deleteTodo()
       }
       if (event.target.matches('.flagged-div')) {
         console.log(event.target);
@@ -153,18 +179,7 @@ const DomController = () => {
       if (event.target.matches('.complete-div')) {
         console.log(event.target);
       }
-      if (event.target.matches('#project-submit-edit')) { /////////////////////////////
-        confirmProjectEdit(event);
-      }
-      if (event.target.matches('#project-cancel-edit')) {
-        toggleModalProjectEdit();
-      }
-      if (event.target.matches('#todo-submit-edit')) {
-        confirmTodoEdit(event);
-      }
-      if (event.target.matches('#todo-cancel-edit')) {
-        toggleModalTodoEdit();
-      }
+      
     });
   } 
 
@@ -178,7 +193,7 @@ const DomController = () => {
       }
     );
   }  
-  const appendTodo = (event) => {
+  const appendTodo = () => {//
     let noteConDiv = event.target.querySelector('.notes-container');
     if (noteConDiv.classList.contains('notes-container-rendered')) {
       noteConDiv.classList.remove('notes-container-rendered')
@@ -186,10 +201,13 @@ const DomController = () => {
       let arrayRef = event.target.getAttribute('project-array-ref');    
       let newDivDesc = document.createElement('div');
       newDivDesc.className = 'description-div';
-      newDivDesc.textContent = currentProject.todos[arrayRef].description;
+      newDivDesc.textContent = projectContainer.projects[currentProjectRef].
+          todos[arrayRef].description;
+      
       let newDivNotes = document.createElement('div');
       newDivNotes.className = 'notes-div';    
-      newDivNotes.textContent = currentProject.todos[arrayRef].notes;       
+      newDivNotes.textContent = projectContainer.projects[currentProjectRef].
+          todos[arrayRef].notes;       
       noteConDiv.appendChild(newDivDesc);
       noteConDiv.appendChild(newDivNotes);
       noteConDiv.classList.add('notes-container-rendered') 
@@ -215,7 +233,7 @@ const DomController = () => {
     }
   }
 
-  const popoulateProjectEdit = (event) => {    
+  const popoulateProjectEdit = () => {//
     let arrayRef = event.target.parentNode.getAttribute('container-array-ref');    
     let projectItem = projectContainer.projects[arrayRef];    
     projectTitleEdit.value = projectItem.title; 
@@ -224,7 +242,7 @@ const DomController = () => {
   }
   const popoulateTodoEdit = () => {
     let arrayRef = event.target.parentNode.getAttribute('project-array-ref');
-    let todoItem = currentProject.todos[arrayRef];
+    let todoItem = projectContainer.projects[currentProjectRef].todos[arrayRef];
     todoTitleEdit.value = todoItem.title;
     todoDescriptionEdit.value = todoItem.description;
     todoDueDateEdit.value = todoItem.dueDate;
@@ -232,26 +250,38 @@ const DomController = () => {
     todoNoteEdit.value = todoItem.notes; 
   }
 
-  const confirmProjectEdit = (event) => {
-    console.log("confirm project BUTTON")
-    console.log(event)
-    console.log(event.target)
-    console.log(event.target.parentNode)
-    console.log(event.target.parentNode.parentNode)
-
-    let arrayRef = event.target.parentNode.parentNode.getAttribute('container-array-ref')
-    
-    
-    // targetProject.title = projectTitleEdit.value;
-    // targetProject.description = projectDescriptionEdit.value;
-    // targetProject.color = projectColorEdit.value;
-    // render.renderProjects()
+  const confirmProjectEdit = () => {//
+    let arrayRef = event.target.parentNode.parentNode.getAttribute('container-index');
+    let targetProject = projectContainer.projects[arrayRef];    
+    targetProject.title = projectTitleEdit.value;
+    targetProject.description = projectDescriptionEdit.value;
+    targetProject.color = projectColorEdit.value;    
   }
 
-  const confirmTodoEdit = () => {
-    console.log("confirm todo")
-    let arrayRef = event.target.parentNode.parentNode.getAttribute('project-array-ref')
+  const confirmTodoEdit = () => {    
+    let arrayRef = event.target.parentNode.parentNode.getAttribute('project-index');
+    let targetTodo = projectContainer.projects[currentProjectRef].todos[arrayRef];
+    targetTodo.title = todoTitleEdit.value;
+    targetTodo.description = todoDescriptionEdit.value;
+    targetTodo.dueDate = todoDueDateEdit.value;
+    targetTodo.priority = todoPriorityEdit.value;
+    targetTodo.notes = todoNoteEdit.value;
   }
+
+  const deleteProject = () => {
+    let arrayRef = event.target.parentNode.getAttribute('container-array-ref')
+    if (confirm("This will delete your Project and all it's Todos")) {
+      projectContainer.projects.splice(arrayRef, 1)
+    }
+    
+  }
+
+  const deleteTodo = () => {
+    let arrayRef = event.target.parentNode.getAttribute('project-array-ref')
+    console.log("delete button")
+  }
+
+
   
   ////// Listeners returned for export for page init in index
 
