@@ -1,0 +1,116 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#page-container {
+  background-color: rgb(150, 150, 150);
+}
+
+#header-container {
+  background-color: rgb(200, 200, 200);
+}
+
+#current-display h3 {
+  display: inline-block;
+}
+
+#current-display #project-name {
+  display: inline-block;
+}
+
+#body-container {
+  display: grid;
+  gap: 10px;
+  grid-template-areas: 
+    "project"
+    "todo";
+  grid-template-columns: 1fr;  
+}
+
+@media (min-width: 600px) {
+  #body-container {
+    display: grid;
+    grid-template-areas: "project todo";
+    grid-template-columns: 2fr 5fr;
+  }
+}
+
+#project-container {
+  grid-area: project;
+  background-color: rgb(175, 175, 175);
+}
+
+#todo-container {
+  grid-area: todo;
+  background-color: rgb(175, 175, 175);
+}
+
+/* modals */
+
+#modal-project {
+  display: none;
+  margin: 20px;
+  background-color: rgb(100, 100, 100);
+}
+
+#modal-todo {
+  display: none;
+  margin: 20px;
+  background-color: rgb(125, 125, 125);
+}
+
+#modal-project-edit {
+  display: none;
+  margin: 20px;
+  background-color: rgb(155, 126, 126);
+}
+
+#modal-todo-edit {
+  display: none;
+  margin: 20px;
+  background-color: rgb(155, 126, 126);
+}
+
+/* rendered shit */
+.project-div {
+  margin: 5px;
+  background-color: rgb(214, 253, 203);
+}
+
+.todo-div {
+  margin: 5px;
+  background-color: rgb(203, 247, 253);
+}
+
+.complete-div, .flagged-div {
+  margin: 5px;
+  display: inline-block;
+  background-color: rgb(119, 226, 240);
+} 
+
+#project-description-display, #project-name-display {
+  border: dashed 1px black;
+  margin: auto;
+  margin: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  width: fit-content;  
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  margin: 4px;
+}
+
+.date-div, .description-div, .notes-div, .notes-container {
+  width: fit-content;
+}
+
+div .isFlagged {
+  background-color: rgb(172, 44, 44);
+}
+
+div .isComplete {
+  background-color: rgb(65, 251, 48);
+}
