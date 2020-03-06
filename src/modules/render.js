@@ -1,4 +1,3 @@
-
 const Render = () => {
 
   const renderProjects = (projectContainerArg) => {

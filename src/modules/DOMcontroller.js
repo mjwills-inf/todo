@@ -1,10 +1,13 @@
 import { Todo, Project } from './todoObjects';
 import Render from './render';
-import { projectContainer } from '../index'
+import DefaultData from './defaultData'
 
-const DomController = () => {
+
+const DomController = () => {  
   
   /////// Imported and whole function scoped variables for input nodes
+  const defaultData = DefaultData()
+  let projectContainer = defaultData.projectContainer;
   const render = Render();  
   let currentProjectRef = 0;
   
