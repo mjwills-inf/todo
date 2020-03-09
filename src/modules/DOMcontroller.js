@@ -7,7 +7,7 @@ const DomController = () => {
   
   /////// Imported and whole function scoped variables for input nodes
   const defaultData = DefaultData()
-  let projectContainer = defaultData.projectContainer;
+  let projectContainer = defaultData.projectContainer;   
   const render = Render();  
   let currentProjectRef = 0;
   
@@ -44,6 +44,13 @@ const DomController = () => {
       case 'settings':
         alert("Settings modal [Would be here]")
         break;
+      case 'save':
+        alert("save to localStorage would be set up as an option and then run on obj edit functions")
+        defaultData.saveToLocal(projectContainer)
+        break;
+      case 'clear':
+        localStorage.clear()
+        break;  
       case 'add-project-modal':
         toggleModalProject();
         break;
